@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { ButtonLoadMore } from './Button.styled';
 
 export const Button = ({ onSearch }) => {
@@ -8,4 +9,8 @@ export const Button = ({ onSearch }) => {
       </ButtonLoadMore>
     </>
   );
+};
+
+Button.propTypes = {
+  onSearch: PropTypes.func,
 };

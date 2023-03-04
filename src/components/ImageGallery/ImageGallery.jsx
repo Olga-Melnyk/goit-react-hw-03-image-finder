@@ -4,6 +4,7 @@ import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 import { Button } from '../Button/Button';
 import { Loader } from '../Loader/Loader';
 import { toast } from 'react-hot-toast';
+import PropTypes from 'prop-types';
 
 import { Gallery } from './ImageGallery.styled';
 
@@ -82,3 +83,7 @@ export class ImageGallery extends Component {
     );
   }
 }
+
+ImageGallery.propTypes = {
+  value: PropTypes.string,
+};

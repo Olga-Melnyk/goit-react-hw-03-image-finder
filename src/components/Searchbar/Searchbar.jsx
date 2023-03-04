@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { toast } from 'react-hot-toast';
+import PropTypes from 'prop-types';
 
 import { BsSearch } from 'react-icons/bs';
 
@@ -49,3 +50,7 @@ export class SearchBar extends Component {
     );
   }
 }
+
+SearchBar.propTypes = {
+  onSearch: PropTypes.func,
+};
