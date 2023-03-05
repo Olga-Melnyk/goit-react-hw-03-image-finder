@@ -22,7 +22,7 @@ export class ImageGallery extends Component {
       prevProps.value !== this.props.value ||
       prevProps.page !== this.props.page
     ) {
-      this.setState({ status: 'idle' });
+      // this.setState({ status: 'idle' });
       this.setState({ isLoading: true, isMore: false });
       try {
         const data = await fetchGalleryImageWithQuer(
@@ -39,6 +39,7 @@ export class ImageGallery extends Component {
           this.setState({ isMore: true });
         }
         if (prevProps.value !== this.props.value) {
+          this.setState({ status: 'idle' });
           this.setState({
             images: [...data.hits],
             status: 'resolved',
@@ -56,12 +57,6 @@ export class ImageGallery extends Component {
       }
     }
   }
-
-  // handleClick = () => {
-  //   this.setState(prevState => {
-  //     return { page: prevState.page + 1 };
-  //   });
-  // };
 
   render() {
     return (
