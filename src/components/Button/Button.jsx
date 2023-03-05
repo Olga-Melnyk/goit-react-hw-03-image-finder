@@ -12,5 +12,5 @@ export const Button = ({ onSearch }) => {
 };
 
 Button.propTypes = {
-  onSearch: PropTypes.func,
+  onSearch: PropTypes.func.isRequired,
 };

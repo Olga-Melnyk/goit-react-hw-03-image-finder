@@ -7,10 +7,17 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 export class App extends Component {
   state = {
     textSearch: '',
+    page: 1,
   };
 
   handleSubmit = textSearch => {
-    this.setState({ textSearch });
+    this.setState({ textSearch, page: 1 });
+  };
+
+  handleClick = () => {
+    this.setState(prevState => {
+      return { page: prevState.page + 1 };
+    });
   };
 
   render() {
@@ -20,7 +27,11 @@ export class App extends Component {
           <SearchBar onSearch={this.handleSubmit} />
         </div>
         <div>
-          <ImageGallery value={this.state.textSearch} />
+          <ImageGallery
+            value={this.state.textSearch}
+            page={this.state.page}
+            handleClick={this.handleClick}
+          />
         </div>
         <Toaster toastOptions={{ duration: 1500 }} />
       </div>

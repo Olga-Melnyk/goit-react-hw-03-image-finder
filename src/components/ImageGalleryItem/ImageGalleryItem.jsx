@@ -30,6 +30,6 @@ export class ImageGalleryItem extends Component {
 
 ImageGalleryItem.propTypes = {
   item: PropTypes.shape({
-    id: PropTypes.number,
-  }),
+    id: PropTypes.number.isRequired,
+  }).isRequired,
 };

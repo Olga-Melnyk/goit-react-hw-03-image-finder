@@ -12,7 +12,7 @@ export class ImageGallery extends Component {
   state = {
     images: [],
     status: 'adle',
-    page: 1,
+    // page: 1,
     isLoading: false,
     isMore: false,
   };
@@ -20,13 +20,13 @@ export class ImageGallery extends Component {
   async componentDidUpdate(prevProps, prevState) {
     if (
       prevProps.value !== this.props.value ||
-      prevState.page !== this.state.page
+      prevProps.page !== this.props.page
     ) {
-      this.setState({ isLoading: true });
+      this.setState({ isLoading: true, isMore: false });
       try {
         const data = await fetchGalleryImageWithQuer(
           this.props.value.trim(),
-          this.state.page
+          this.props.page
         );
 
         if (data.hits.length === 0) {
@@ -56,11 +56,11 @@ export class ImageGallery extends Component {
     }
   }
 
-  handleClick = () => {
-    this.setState(prevState => {
-      return { page: prevState.page + 1 };
-    });
-  };
+  // handleClick = () => {
+  //   this.setState(prevState => {
+  //     return { page: prevState.page + 1 };
+  //   });
+  // };
 
   render() {
     return (
@@ -75,7 +75,7 @@ export class ImageGallery extends Component {
           </Gallery>
         )}
         {this.state.isMore && (
-          <Button onSearch={this.handleClick}>Load more</Button>
+          <Button onSearch={this.props.handleClick}>Load more</Button>
         )}
 
         {this.state.status === 'rejected' && <p>Something wrong, try later</p>}
@@ -85,5 +85,7 @@ export class ImageGallery extends Component {
 }
 
 ImageGallery.propTypes = {
-  value: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  page: PropTypes.number.isRequired,
+  handleCilck: PropTypes.func.isRequired,
 };
