@@ -11,7 +11,7 @@ import { Gallery } from './ImageGallery.styled';
 export class ImageGallery extends Component {
   state = {
     images: [],
-    status: 'adle',
+    status: 'idle',
     // page: 1,
     isLoading: false,
     isMore: false,
@@ -22,6 +22,7 @@ export class ImageGallery extends Component {
       prevProps.value !== this.props.value ||
       prevProps.page !== this.props.page
     ) {
+      this.setState({ status: 'idle' });
       this.setState({ isLoading: true, isMore: false });
       try {
         const data = await fetchGalleryImageWithQuer(
