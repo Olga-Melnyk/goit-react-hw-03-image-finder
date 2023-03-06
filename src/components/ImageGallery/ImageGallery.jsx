@@ -12,9 +12,9 @@ export class ImageGallery extends Component {
   state = {
     images: [],
     status: 'idle',
-    // page: 1,
     isLoading: false,
     isMore: false,
+    isNewSearch: false,
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -22,8 +22,12 @@ export class ImageGallery extends Component {
       prevProps.value !== this.props.value ||
       prevProps.page !== this.props.page
     ) {
-      // this.setState({ status: 'idle' });
+      if (this.state.isNewSearch && prevProps.value !== this.props.value) {
+        this.setState({ images: [] });
+      }
+
       this.setState({ isLoading: true, isMore: false });
+
       try {
         const data = await fetchGalleryImageWithQuer(
           this.props.value.trim(),
@@ -35,12 +39,14 @@ export class ImageGallery extends Component {
           toast.error('Sorry, there are no images. Please try again.');
           return;
         }
+
         if (data.hits.length === 12) {
           this.setState({ isMore: true });
         }
+
         if (prevProps.value !== this.props.value) {
-          this.setState({ status: 'idle' });
           this.setState({
+            isNewSearch: true,
             images: [...data.hits],
             status: 'resolved',
             isLoading: false,
